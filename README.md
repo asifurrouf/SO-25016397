@@ -7,6 +7,8 @@ Started from example project Android ActionBarCompat-Basic Sample and extending 
 https://maxalley.wordpress.com/2012/10/25/android-creating-a-tab-layout-with-tabhost-and-tabwidget/
 combined with https://maxalley.wordpress.com/2012/10/27/android-styling-the-tabs-in-a-tabwidget/
 
+Info on Espresso: https://code.google.com/p/android-test-kit/wiki/EspressoSamples
+
 
 # Original README content below
 
