@@ -21,4 +21,8 @@
     -->
     <item name="menu_location" type="id"/>
 
+    <item name="tab_id_1" type="id"/>
+    <item name="tab_id_2" type="id"/>
+    <item name="tab_id_3" type="id"/>
+
 </resources>

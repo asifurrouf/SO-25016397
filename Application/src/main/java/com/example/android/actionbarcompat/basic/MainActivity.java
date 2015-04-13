@@ -44,31 +44,31 @@ public class MainActivity extends TabActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sample_main);
 
-        TabHost tabHost = getTabHost();//(TabHost) findViewById(android.R.id.tabhost);
+        TabHost tabHost = getTabHost();
 
-        // setNewTab(context, tabHost, tag, title, icon, contentID);
-        this.setNewTab(this, tabHost, "tab1", R.string.textTabTitle1, android.R.drawable.ic_menu_crop, R.id.tab1);
-        this.setNewTab(this, tabHost, "tab2", R.string.textTabTitle2, android.R.drawable.ic_menu_add, R.id.tab2);
-        this.setNewTab(this, tabHost, "tab3", R.string.textTabTitle3, android.R.drawable.ic_menu_delete, R.id.tab3);
-
-        //tabHost.setCurrentTabByTag("tab2"); //-- optional to set a tab programmatically.
+        // setNewTab(tabHost, tag, title, icon, contentID, viewID);
+        this.setNewTab(tabHost, "tab1", R.string.textTabTitle1, android.R.drawable.ic_menu_crop, R.id.tab1, R.id.tab_id_1);
+        this.setNewTab(tabHost, "tab2", R.string.textTabTitle2, android.R.drawable.ic_menu_add, R.id.tab2, R.id.tab_id_2);
+        this.setNewTab(tabHost, "tab3", R.string.textTabTitle3, android.R.drawable.ic_menu_delete, R.id.tab3, R.id.tab_id_3);
     }
 
-    private void setNewTab(Context context, TabHost tabHost, String tag, int title, int icon, int contentID ){
+    private void setNewTab(TabHost tabHost, String tag, int title, int icon, int contentID, int viewId ){
         TabHost.TabSpec tabSpec = tabHost.newTabSpec(tag);
-        String titleString = getString(title);
-//        tabSpec.setIndicator(titleString, context.getResources().getDrawable(android.R.drawable.star_on));
-        tabSpec.setIndicator(getTabIndicator(tabHost.getContext(), title, icon)); // new function to inject our own tab layout
+        tabSpec.setIndicator(getTabIndicator(tabHost.getContext(), title, icon, viewId, tag));
         tabSpec.setContent(contentID);
         tabHost.addTab(tabSpec);
     }
 
-    private View getTabIndicator(Context context, int title, int icon) {
+    private View getTabIndicator(Context context, int title, int icon, int viewId, String viewTag) {
         View view = LayoutInflater.from(context).inflate(R.layout.tab_layout, null);
         ImageView iv = (ImageView) view.findViewById(R.id.image_view);
         iv.setImageResource(icon);
         TextView tv = (TextView) view.findViewById(R.id.text_view);
         tv.setText(title);
+
+        tv.setId(viewId);
+        tv.setTag(viewTag);
+
         return view;
     }
 
