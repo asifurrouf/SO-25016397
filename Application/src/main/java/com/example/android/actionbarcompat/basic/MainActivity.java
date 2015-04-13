@@ -16,11 +16,19 @@
 
 package com.example.android.actionbarcompat.basic;
 
+import android.app.TabActivity;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTabHost;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TabHost;
+import android.widget.TextView;
 
 /**
  * This sample shows you how to use ActionBarCompat to create a basic Activity which displays
@@ -29,12 +37,39 @@ import android.view.MenuItem;
  * This Activity extends from {@link ActionBarActivity}, which provides all of the function
  * necessary to display a compatible Action Bar on devices running Android v2.1+.
  */
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends TabActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sample_main);
+
+        TabHost tabHost = getTabHost();//(TabHost) findViewById(android.R.id.tabhost);
+
+        // setNewTab(context, tabHost, tag, title, icon, contentID);
+        this.setNewTab(this, tabHost, "tab1", R.string.textTabTitle1, android.R.drawable.ic_menu_crop, R.id.tab1);
+        this.setNewTab(this, tabHost, "tab2", R.string.textTabTitle2, android.R.drawable.ic_menu_add, R.id.tab2);
+        this.setNewTab(this, tabHost, "tab3", R.string.textTabTitle3, android.R.drawable.ic_menu_delete, R.id.tab3);
+
+        //tabHost.setCurrentTabByTag("tab2"); //-- optional to set a tab programmatically.
+    }
+
+    private void setNewTab(Context context, TabHost tabHost, String tag, int title, int icon, int contentID ){
+        TabHost.TabSpec tabSpec = tabHost.newTabSpec(tag);
+        String titleString = getString(title);
+//        tabSpec.setIndicator(titleString, context.getResources().getDrawable(android.R.drawable.star_on));
+        tabSpec.setIndicator(getTabIndicator(tabHost.getContext(), title, icon)); // new function to inject our own tab layout
+        tabSpec.setContent(contentID);
+        tabHost.addTab(tabSpec);
+    }
+
+    private View getTabIndicator(Context context, int title, int icon) {
+        View view = LayoutInflater.from(context).inflate(R.layout.tab_layout, null);
+        ImageView iv = (ImageView) view.findViewById(R.id.image_view);
+        iv.setImageResource(icon);
+        TextView tv = (TextView) view.findViewById(R.id.text_view);
+        tv.setText(title);
+        return view;
     }
 
     // BEGIN_INCLUDE(create_menu)

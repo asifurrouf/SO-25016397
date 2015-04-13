@@ -1,3 +1,15 @@
+# About
+
+Example project created for Stack Overflow tread
+http://stackoverflow.com/questions/25016397/how-open-tab-in-espresso
+
+Started from example project Android ActionBarCompat-Basic Sample and extending for tabhost using:
+https://maxalley.wordpress.com/2012/10/25/android-creating-a-tab-layout-with-tabhost-and-tabwidget/
+combined with https://maxalley.wordpress.com/2012/10/27/android-styling-the-tabs-in-a-tabwidget/
+
+
+# Original README content below
+
 Android ActionBarCompat-Basic Sample
 ===================================
 
